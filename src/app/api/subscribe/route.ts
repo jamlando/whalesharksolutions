@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createOrUpdateContact } from '@/lib/hubspot'
+import { sendWelcomeEmail } from '@/lib/email'
 
 export async function POST(request: Request) {
   try {
@@ -30,6 +31,16 @@ export async function POST(request: Request) {
       email,
       timestamp: new Date().toISOString(),
     })
+
+    // Send welcome email for new contacts
+    if (isNew) {
+      try {
+        await sendWelcomeEmail(email)
+      } catch (emailError) {
+        // Log the error but don't fail the request
+        console.error('Failed to send welcome email:', emailError)
+      }
+    }
 
     return NextResponse.json(
       { 
