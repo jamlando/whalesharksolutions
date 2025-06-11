@@ -61,8 +61,8 @@ export default function EmailForm({ onSubmit }: EmailFormProps) {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             className={`w-full px-4 py-3 rounded-lg border ${
-              error ? 'border-red-500' : 'border-whale-secondary-light'
-            } focus:outline-none focus:ring-2 focus:ring-whale-primary focus:border-transparent`}
+              error ? 'border-red-500' : 'border-gray-100'
+            } focus:outline-none focus:ring-1 focus:ring-whale-primary/30 focus:border-transparent text-gray-800 bg-white/50 backdrop-blur-sm placeholder-gray-600 shadow-sm`}
             disabled={isLoading}
             aria-label="Email address"
           />
