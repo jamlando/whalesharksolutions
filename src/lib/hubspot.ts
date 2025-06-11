@@ -86,8 +86,18 @@ export async function createOrUpdateContact(properties: ContactProperties) {
       const createResponse = await hubspotClient.crm.contacts.basicApi.create(createRequest)
       return { contact: createResponse, isNew: true }
     }
-  } catch (error) {
-    console.error('HubSpot API Error:', error)
+  } catch (error: unknown) {
+    // Enhanced error logging
+    const errorDetails = {
+      error,
+      errorMessage: error instanceof Error ? error.message : 'Unknown error',
+      errorResponse: error && typeof error === 'object' && 'response' in error 
+        ? (error.response as any)?.data 
+        : 'No response data',
+      timestamp: new Date().toISOString(),
+      properties: properties // Log the properties we tried to send
+    }
+    console.error('HubSpot API Error Details:', errorDetails)
     throw new Error('Failed to create or update contact in HubSpot')
   }
 }

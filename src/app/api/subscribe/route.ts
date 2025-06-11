@@ -12,6 +12,15 @@ export async function POST(request: Request) {
       )
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
+        { status: 400 }
+      )
+    }
+
     // Create or update contact in HubSpot
     const { contact, isNew } = await createOrUpdateContact({ email })
 
@@ -30,22 +39,26 @@ export async function POST(request: Request) {
       { status: 200 }
     )
   } catch (error: unknown) {
-    // Log the error for debugging
-    console.error('Subscription error:', {
+    // Enhanced error logging
+    const errorDetails = {
       error,
+      errorMessage: error instanceof Error ? error.message : 'Unknown error',
       timestamp: new Date().toISOString(),
-    })
+      requestBody: await request.json().catch(() => 'Could not parse request body')
+    }
+    console.error('Subscription API Error:', errorDetails)
 
-    // Type guard to check if error is an Error object
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
+    // Return appropriate error response
+    const statusCode = error instanceof Error && error.message.includes('not initialized') 
+      ? 503 // Service Unavailable for missing API key
+      : 500 // Internal Server Error for other cases
 
-    // Return a user-friendly error message
     return NextResponse.json(
       { 
         error: 'Failed to subscribe. Please try again later.',
-        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+        details: process.env.NODE_ENV === 'development' ? errorDetails.errorMessage : undefined
       },
-      { status: 500 }
+      { status: statusCode }
     )
   }
 } 
