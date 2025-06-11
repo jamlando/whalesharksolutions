@@ -25,7 +25,7 @@ export default function Home() {
       <div className="content-container max-w-2xl w-full text-center">
         <div className="mb-16">
           <Image
-            src="/images/wSharkMain.svg"
+            src="/images/wSharkWhiteTransparentv1.svg"
             alt="Whale Shark Solutions Logo"
             width={600}
             height={600}
