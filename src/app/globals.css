@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  body {
+    @apply min-h-screen text-white relative;
+    background-image: url('/images/backgrounds/ocean-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Overlay gradient to maintain brand colors and readability */
+  body::before {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(
+      to bottom right,
+      rgba(0, 45, 64, 0.85),  /* whale-secondary-dark with opacity */
+      rgba(0, 142, 176, 0.75), /* whale-secondary-deep with opacity */
+      rgba(2, 179, 206, 0.65)  /* whale-secondary-light with opacity */
+    );
+    z-index: 0;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-whale-primary text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity;
+  }
+  
+  .btn-secondary {
+    @apply bg-whale-secondary-deep text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity;
+  }
+
+  .content-container {
+    @apply relative z-10 rounded-2xl p-8;
+    background: rgba(0, 45, 64, 0.15); /* whale-secondary-dark with very low opacity */
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 8px 32px rgba(0, 45, 64, 0.15),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+}
