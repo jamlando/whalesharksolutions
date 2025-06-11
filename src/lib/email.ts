@@ -11,7 +11,7 @@ export async function sendWelcomeEmail(email: string) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Whale Shark Solutions <welcome@whalesharksolutions.com>',
+      from: 'Taylor at Whale Shark Solutions <taylor@whalesharksolutions.com>',
       to: email,
       subject: 'Welcome to Whale Shark Solutions!',
       html: `
