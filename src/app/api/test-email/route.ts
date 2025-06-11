@@ -5,9 +5,14 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: Request) {
   try {
+    // Log API key presence (not the actual key)
+    console.log('RESEND_API_KEY present:', !!process.env.RESEND_API_KEY)
+    
     const { email } = await request.json()
+    console.log('Attempting to send test email to:', email)
 
     if (!email) {
+      console.log('No email provided in request')
       return NextResponse.json(
         { error: 'Email is required' },
         { status: 400 }
@@ -15,6 +20,7 @@ export async function POST(request: Request) {
     }
 
     // Send test email
+    console.log('Sending email via Resend...')
     const { data, error } = await resend.emails.send({
       from: 'Taylor at Whale Shark Solutions <taylor@whalesharksolutions.com>',
       to: email,
@@ -33,12 +39,28 @@ export async function POST(request: Request) {
     })
 
     if (error) {
-      console.error('Failed to send test email:', error)
+      console.error('Resend API error:', {
+        name: error.name,
+        message: error.message,
+        details: error
+      })
       return NextResponse.json(
-        { error: 'Failed to send test email', details: error },
+        { 
+          error: 'Failed to send test email', 
+          details: {
+            name: error.name,
+            message: error.message
+          }
+        },
         { status: 500 }
       )
     }
+
+    console.log('Email sent successfully:', {
+      id: data?.id,
+      to: email,
+      from: 'Taylor at Whale Shark Solutions <taylor@whalesharksolutions.com>'
+    })
 
     return NextResponse.json(
       { 
@@ -48,11 +70,20 @@ export async function POST(request: Request) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Test email error:', error)
+    console.error('Unexpected error in test email endpoint:', {
+      error: error instanceof Error ? {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      } : error
+    })
     return NextResponse.json(
       { 
         error: 'Failed to send test email',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? {
+          name: error.name,
+          message: error.message
+        } : 'Unknown error'
       },
       { status: 500 }
     )
