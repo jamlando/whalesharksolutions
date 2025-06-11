@@ -80,7 +80,6 @@ export async function createOrUpdateContact(properties: ContactProperties) {
         properties: {
           ...properties,
           hs_lead_status: 'NEW',
-          createdate: new Date().toISOString(),
         },
         associations: [],
       }
