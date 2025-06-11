@@ -1,11 +1,28 @@
 import { Client } from '@hubspot/api-client'
 import type { PublicObjectSearchRequest, SimplePublicObjectInputForCreate } from '@hubspot/api-client/lib/codegen/crm/contacts'
 
-if (!process.env.HUBSPOT_API_KEY) {
-  throw new Error('HUBSPOT_API_KEY is not defined in environment variables')
+// Check for required environment variables
+const requiredEnvVars = {
+  HUBSPOT_API_KEY: process.env.HUBSPOT_API_KEY,
+  HUBSPOT_PORTAL_ID: process.env.HUBSPOT_PORTAL_ID,
 }
 
-const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_API_KEY })
+// Validate environment variables
+const missingEnvVars = Object.entries(requiredEnvVars)
+  .filter(([_, value]) => !value)
+  .map(([key]) => key)
+
+if (missingEnvVars.length > 0) {
+  console.warn(
+    `Missing required environment variables: ${missingEnvVars.join(', ')}. ` +
+    'HubSpot integration will not be available.'
+  )
+}
+
+// Initialize HubSpot client only if API key is available
+const hubspotClient = process.env.HUBSPOT_API_KEY 
+  ? new Client({ accessToken: process.env.HUBSPOT_API_KEY })
+  : null
 
 export interface ContactProperties {
   email: string
@@ -17,6 +34,10 @@ export interface ContactProperties {
 }
 
 export async function createOrUpdateContact(properties: ContactProperties) {
+  if (!hubspotClient) {
+    throw new Error('HubSpot client is not initialized. Please check your environment variables.')
+  }
+
   try {
     // First, try to find the contact by email
     const searchRequest: PublicObjectSearchRequest = {

@@ -25,15 +25,15 @@ export default function Home() {
       <div className="content-container max-w-2xl w-full text-center">
         <div className="mb-8">
           <Image
-            src="/images/Whale Shark.svg"
+            src="/images/wSharkMain.svg"
             alt="Whale Shark Solutions Logo"
-            width={200}
-            height={200}
+            width={400}
+            height={400}
             className="mx-auto"
             priority
           />
         </div>
-        <h1 className="text-4xl font-bold mb-8">
+        <h1 className="text-2xl font-normal mb-8">
           Sign up to learn more
         </h1>
         <EmailForm onSubmit={handleSubmit} />
