@@ -4,9 +4,10 @@ import React, { useState } from 'react'
 
 interface EmailFormProps {
   onSubmit: (email: string) => Promise<void>
+  successMessage?: string | null
 }
 
-export default function EmailForm({ onSubmit }: EmailFormProps) {
+export default function EmailForm({ onSubmit, successMessage }: EmailFormProps) {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -46,7 +47,7 @@ export default function EmailForm({ onSubmit }: EmailFormProps) {
   if (success) {
     return (
       <div className="text-whale-secondary-deep text-lg font-medium">
-        Thank you for signing up! We'll be in touch soon.
+        {successMessage || 'Thank you for signing up! We\'ll be in touch soon.'}
       </div>
     )
   }

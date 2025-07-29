@@ -5,6 +5,8 @@ import Image from 'next/image'
 import EmailForm from '@/components/EmailForm'
 
 export default function Home() {
+  const [successMessage, setSuccessMessage] = React.useState<string | null>(null)
+
   const handleSubmit = async (email: string) => {
     const response = await fetch('/api/subscribe', {
       method: 'POST',
@@ -14,10 +16,14 @@ export default function Home() {
       body: JSON.stringify({ email }),
     })
 
+    const data = await response.json()
+
     if (!response.ok) {
-      const data = await response.json()
       throw new Error(data.error || 'Failed to subscribe')
     }
+
+    // Set the success message based on whether it's a new or existing user
+    setSuccessMessage(data.message)
   }
 
   return (
@@ -55,7 +61,7 @@ export default function Home() {
         <h1 className="text-2xl font-normal mb-8 text-gray-400">
           Sign up to learn more
         </h1>
-        <EmailForm onSubmit={handleSubmit} />
+        <EmailForm onSubmit={handleSubmit} successMessage={successMessage} />
       </div>
     </main>
   )

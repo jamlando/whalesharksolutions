@@ -165,8 +165,16 @@ module.exports = {
    - Error handling and logging
    - TypeScript type safety
    - Environment variable configuration
-2. Next steps:
-   - Test the integration with a real email submission
+2. **CRITICAL ISSUE RESOLVED**: User experiencing 404 and 500 errors on signup
+   - **Root Cause**: Existing users were getting 500 errors due to invalid HubSpot property `last_modified_date`
+   - **Solution**: 
+     - Removed invalid `last_modified_date` property from HubSpot contact updates
+     - Added proper handling for existing users with clear messaging
+     - Updated API to return different messages for new vs existing users
+     - Updated frontend to display appropriate success messages
+   - **Status**: ✅ FIXED - API now returns proper responses for both new and existing users
+3. Next steps:
+   - Test the signup flow in the browser to confirm the fix works
    - Set up a welcome email workflow in HubSpot
    - Add analytics tracking
    - Consider adding additional contact properties if needed
@@ -181,6 +189,9 @@ module.exports = {
 7. Handle both new and existing contacts in HubSpot integration
 8. Use TypeScript types from the HubSpot API client for better type safety
 9. Implement proper error logging for debugging
+10. **CRITICAL**: When integrating with HubSpot API, only use properties that exist in your HubSpot account. The `last_modified_date` property doesn't exist by default and causes 400 errors
+11. Always provide clear, user-friendly messages for different scenarios (new vs existing users)
+12. Test API endpoints with both new and existing data to catch edge cases
 
 ## Next Steps
 1. Test the integration by submitting a test email

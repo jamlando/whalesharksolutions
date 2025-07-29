@@ -38,6 +38,9 @@ export async function createOrUpdateContact(properties: ContactProperties) {
     throw new Error('HubSpot client is not initialized. Please check your environment variables.')
   }
 
+  console.log('Starting HubSpot contact creation/update for email:', properties.email)
+  console.log('HubSpot client initialized:', !!hubspotClient)
+
   try {
     // First, try to find the contact by email
     const searchRequest: PublicObjectSearchRequest = {
@@ -58,7 +61,12 @@ export async function createOrUpdateContact(properties: ContactProperties) {
       after: 0,
     }
 
+    console.log('Searching for existing contact with email:', properties.email)
     const searchResponse = await hubspotClient.crm.contacts.searchApi.doSearch(searchRequest)
+    console.log('Search response received:', {
+      total: searchResponse.total,
+      resultsCount: searchResponse.results?.length || 0
+    })
     const existingContact = searchResponse.results[0]
 
     if (existingContact) {
@@ -69,7 +77,6 @@ export async function createOrUpdateContact(properties: ContactProperties) {
           properties: {
             ...properties,
             hs_lead_status: 'NEW', // Reset lead status
-            last_modified_date: new Date().toISOString(),
           },
         }
       )

@@ -44,8 +44,9 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { 
-        message: isNew ? 'Successfully subscribed' : 'Successfully updated subscription',
-        contactId: contact.id
+        message: isNew ? 'Successfully subscribed' : 'You have already signed up! We\'ll be in touch soon.',
+        contactId: contact.id,
+        isNew
       },
       { status: 200 }
     )
@@ -67,7 +68,12 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { 
         error: 'Failed to subscribe. Please try again later.',
-        details: process.env.NODE_ENV === 'development' ? errorDetails.errorMessage : undefined
+        details: process.env.NODE_ENV === 'development' ? errorDetails.errorMessage : undefined,
+        debug: process.env.NODE_ENV === 'development' ? {
+          hasHubSpotKey: !!process.env.HUBSPOT_API_KEY,
+          hasPortalId: !!process.env.HUBSPOT_PORTAL_ID,
+          errorMessage: error instanceof Error ? error.message : 'Unknown error type'
+        } : undefined
       },
       { status: statusCode }
     )
