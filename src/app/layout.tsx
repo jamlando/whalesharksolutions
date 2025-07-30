@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     siteName: 'Whale Shark Solutions',
     images: [
       {
-        url: '/images/wsMainDark.svg',
+        url: '/images/wsMainDark.png',
         width: 1200,
         height: 630,
         alt: 'Whale Shark Solutions Logo',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Whale Shark Solutions',
     description: 'Streamlining workflows and boosting team productivity through expert tool implementation, automation, and comprehensive training programs.',
-    images: ['/images/wsMainDark.svg'],
+    images: ['/images/wsMainDark.png'],
   },
 }
 
