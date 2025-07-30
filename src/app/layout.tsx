@@ -11,7 +11,29 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Whale Shark Solutions',
-  description: 'Sign up to learn more about Whale Shark Solutions.',
+  description: 'Streamlining workflows and boosting team productivity through expert tool implementation, automation, and comprehensive training programs.',
+  openGraph: {
+    title: 'Whale Shark Solutions',
+    description: 'Streamlining workflows and boosting team productivity through expert tool implementation, automation, and comprehensive training programs.',
+    url: 'https://whalesharksolutions.com',
+    siteName: 'Whale Shark Solutions',
+    images: [
+      {
+        url: '/images/wsMainDark.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Whale Shark Solutions Logo',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Whale Shark Solutions',
+    description: 'Streamlining workflows and boosting team productivity through expert tool implementation, automation, and comprehensive training programs.',
+    images: ['/images/wsMainDark.svg'],
+  },
 }
 
 export default function RootLayout({
