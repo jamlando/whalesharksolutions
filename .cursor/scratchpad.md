@@ -5,6 +5,7 @@
 - Implement email capture functionality integrated with HubSpot CRM
 - Build a professional, brand-consistent user experience
 - Establish a foundation for future marketing and lead generation efforts
+- **NEW PHASE**: Redesign homepage with stunning hero section and improved user experience
 
 ## Brand Colors
 Primary Color: #F99F81 (Coral/Orange)
@@ -60,7 +61,7 @@ module.exports = {
 
 ## High-level Task Breakdown
 
-### Phase 1: Project Setup and Basic Structure
+### Phase 1: Project Setup and Basic Structure ✅ COMPLETED
 1. Initialize Next.js project with TypeScript
    - Success Criteria: Project runs locally with `npm run dev`
    - Dependencies: Next.js, React, TypeScript, Tailwind CSS
@@ -74,7 +75,7 @@ module.exports = {
    - Success Criteria: Clean, organized directory structure
    - Components, pages, styles, and utilities directories created
 
-### Phase 2: Core Components Development
+### Phase 2: Core Components Development ✅ COMPLETED
 4. Create Logo component
    - Success Criteria: SVG logo displays correctly at all screen sizes
    - Dependencies: SVG file
@@ -92,7 +93,7 @@ module.exports = {
      - Proper spacing and alignment
      - Mobile-first design
 
-### Phase 3: Backend Integration
+### Phase 3: Backend Integration ✅ COMPLETED
 7. Set up HubSpot API integration
    - Success Criteria:
      - API route created
@@ -105,7 +106,7 @@ module.exports = {
      - Error handling implemented
      - Success/error feedback to user
 
-### Phase 4: Styling and Polish
+### Phase 4: Styling and Polish ✅ COMPLETED
 9. Implement responsive design
    - Success Criteria:
      - Looks good on mobile, tablet, and desktop
@@ -118,7 +119,7 @@ module.exports = {
       - Loading states
       - Success/error transitions
 
-### Phase 5: Testing and Optimization
+### Phase 5: Testing and Optimization ✅ COMPLETED
 11. Implement testing
     - Success Criteria:
       - Unit tests for components
@@ -131,12 +132,42 @@ module.exports = {
       - Google Analytics integrated
       - HubSpot tracking code added
 
-### Phase 6: Deployment
+### Phase 6: Deployment ✅ COMPLETED
 13. Deploy to Vercel
     - Success Criteria:
       - Site deployed and accessible
       - Environment variables configured
       - Domain connected (if available)
+
+### Phase 7: Homepage Redesign (NEW)
+14. Create stunning hero section with video/gif background
+    - Success Criteria:
+      - Video or GIF plays on loop in background
+      - "Whale Shark Solutions" text is transparent/cut-out
+      - Background is blurred except through text
+      - Smooth, professional animation
+      - Responsive across all devices
+
+15. Implement navigation bar
+    - Success Criteria:
+      - Logo positioned top-left
+      - "Get Started" button top-right
+      - Responsive design
+      - Smooth transitions
+
+16. Add tagline and services section
+    - Success Criteria:
+      - "Gentle Giants of Software Solutions" tagline
+      - Service bullets clearly displayed
+      - Professional typography and spacing
+      - Consistent with brand colors
+
+17. Create signup page
+    - Success Criteria:
+      - Dedicated page for email capture
+      - Existing form functionality
+      - Professional design
+      - Clear call-to-action
 
 ## Project Status Board
 - [x] Phase 1: Project Setup and Basic Structure
@@ -150,14 +181,19 @@ module.exports = {
 - [x] Phase 3: Backend Integration
   - [x] Set up HubSpot API integration
   - [x] Implement form submission handler
-- [ ] Phase 4: Styling and Polish
+- [x] Phase 4: Styling and Polish
   - [x] Implement responsive design
-  - [ ] Add animations and micro-interactions
-- [ ] Phase 5: Testing and Optimization
-  - [ ] Implement testing
-  - [ ] SEO and Analytics setup
-- [ ] Phase 6: Deployment
-  - [ ] Deploy to Vercel
+  - [x] Add animations and micro-interactions
+- [x] Phase 5: Testing and Optimization
+  - [x] Implement testing
+  - [x] SEO and Analytics setup
+- [x] Phase 6: Deployment
+  - [x] Deploy to Vercel
+- [ ] Phase 7: Homepage Redesign (NEW)
+  - [ ] Create stunning hero section with video/gif background
+  - [ ] Implement navigation bar
+  - [ ] Add tagline and services section
+  - [ ] Create signup page
 
 ## Executor's Feedback or Assistance Requests
 1. HubSpot integration is now complete with:
@@ -173,11 +209,23 @@ module.exports = {
      - Updated API to return different messages for new vs existing users
      - Updated frontend to display appropriate success messages
    - **Status**: ✅ FIXED - API now returns proper responses for both new and existing users
-3. Next steps:
-   - Test the signup flow in the browser to confirm the fix works
-   - Set up a welcome email workflow in HubSpot
-   - Add analytics tracking
-   - Consider adding additional contact properties if needed
+3. **NEW REDESIGN REQUEST**: Homepage redesign with stunning hero section
+   - **Requirements**: 
+     - Video/GIF background with transparent text effect
+     - Navigation bar with logo and "Get Started" button
+     - Tagline: "Gentle Giants of Software Solutions"
+     - Services section with bullet points
+     - Dedicated signup page
+   - **Status**: 🚀 IMPLEMENTING - Branch: `redesign-homepage`
+   - **Assets Available**: 
+     - Video: `4323703-uhd_2562_1440_25fps.mp4` (8MB)
+     - Background: `jeremiah-del-mar-0lgdsiAdg3k-unsplash.jpg` (2.7MB)
+   - **Animation Implementation**: 
+     - ✅ Framer Motion installed
+     - ✅ Scroll-based logo animation (moves up, shrinks, disappears)
+     - ✅ Tagline modal slides in over background
+     - ✅ Services section appears with staggered animations
+     - ✅ Footer with fade-in animation
 
 ## Lessons
 1. When creating a Next.js project, ensure the project name follows npm naming conventions (lowercase)

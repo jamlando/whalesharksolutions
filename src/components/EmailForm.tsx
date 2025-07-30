@@ -38,7 +38,18 @@ export default function EmailForm({ onSubmit, successMessage }: EmailFormProps) 
       setSuccess(true)
       setEmail('')
     } catch (err) {
-      setError('Something went wrong. Please try again.')
+      // Handle different error scenarios
+      if (err instanceof Error) {
+        if (err.message.includes('already signed up') || err.message.includes('already subscribed')) {
+          // User already subscribed - show success message
+          setSuccess(true)
+          setEmail('')
+        } else {
+          setError(err.message || 'Something went wrong. Please try again.')
+        }
+      } else {
+        setError('Something went wrong. Please try again.')
+      }
     } finally {
       setIsLoading(false)
     }
