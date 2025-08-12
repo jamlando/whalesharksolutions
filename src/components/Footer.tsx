@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="mb-8">
           <div className="mb-4">
             <Image
-              src="/images/wSharkTextOnly.svg"
+              src="/images/wSharkWhiteTransparentv1.svg"
               alt="Whale Shark Solutions"
               width={300}
               height={80}
